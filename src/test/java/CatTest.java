@@ -2,8 +2,8 @@ import com.example.Cat;
 import com.example.Feline;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -11,21 +11,22 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class CatTest {
 
-    @Spy
-    Feline predator;
+    @Mock
+    Feline feline;
 
     @Test
     public void getSoundTestReturnCorrectValue() {
-        Cat cat = new Cat(predator);
-        String actualSound = cat.getSound();
-        assertEquals("Мяу", actualSound);
+        Cat cat = new Cat(feline);
+        String actualResult = cat.getSound();
+        String expectedResult = "Мяу";
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void getFoodTest() throws Exception {
-        Cat cat = new Cat(predator);
+        Cat cat = new Cat(feline);
         cat.getFood();
-        Mockito.verify(predator, Mockito.times(1)).eatMeat();
+        Mockito.verify(feline, Mockito.times(1)).eatMeat();
     }
 
 }
